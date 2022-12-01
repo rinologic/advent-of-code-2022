@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 
+// Simple class to represent an Elf
 class Elf {
     id: number = 0;
     calories: number = 0;
@@ -7,7 +8,7 @@ class Elf {
 
 class Day1 {
 
-    // Keep tracks of the elves Elf ID and total calories
+    // Create an array of Elf objects
     elves: Elf[] = [];
 
     readData(fileName: string) {
@@ -19,7 +20,9 @@ class Day1 {
 
             let elf = 0;
             for (let line of lines) {
-                if (line == "") { // Got a break point, process total, if any
+                // Empty line, push elf to array
+                // Note: This code assumes there is an empty line at the end of the file. This almost got me!
+                if (line == "") {
                     if (totalCalories != 0) {
                         let myElf = new Elf();
                         myElf.id = elf;
@@ -29,6 +32,7 @@ class Day1 {
                         totalCalories = 0;
                     }
                 } else {
+                    // keep appending to total calories
                     totalCalories = totalCalories + Number(line);
                 }
             }
@@ -46,10 +50,21 @@ class Day1 {
         );
         console.log(sortedElves[0].calories);
     }
+    getTopThreeTotalCalories() {
+        let sortedElves = this.elves.sort(
+            (a, b) => (
+                a.calories < b.calories ? 1 : -1)
+        );
+        console.log(
+            sortedElves[0].calories +
+            sortedElves[1].calories +
+            sortedElves[2].calories
+        );
+    }
 }
 
 console.log("Day 1");
 const day1 = new Day1();
-console.log("Data Result");
 day1.readData('data.txt');
 day1.getHighestCalories();
+day1.getTopThreeTotalCalories();
