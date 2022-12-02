@@ -194,6 +194,6 @@ class Day2 {
 
 console.log("Day 2");
 const day2 = new Day2();
-day2.partOne('test_data.txt');
+day2.partOne('data.txt');
 day2.partTwo('data.txt');
 
